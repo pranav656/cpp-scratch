@@ -1,0 +1,20 @@
+Joining twice in C++ can cause program crash. So check if the thread is joinable before joining.
+
+
+You can detach from a parent thread using detach() so the main thread does not wait for the parent thread to complete. Double detach is also a problem.
+
+try_lock() is a non-blocking call. Tries to lock the mutex. It returns index of mutex if it was not able to lock. The behavior is undefined if
+the same thread tries to lock the mutex twice.
+
+
+std::async:
+It runs a function asynchronously and returns a std::future that will hold
+the result. There are three launch policies. It potentially spawns
+a task/thread. Deferred policy means that it creates a thread if possible 
+(there are cases where OS is overloaded and it might not be able to 
+create the thread).
+
+Conditional variables are used to notify other threads.
+Notify one/Notify all:
+Notify one thread or all
+ 

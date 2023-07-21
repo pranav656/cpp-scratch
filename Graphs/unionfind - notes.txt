@@ -1,0 +1,5 @@
+Union find basically puts objects having the same properties into
+one single group.
+
+find of node will return a representative node (most likely the (grand)parent node).
+If two elements have the same representative then it means they belong to the same group.

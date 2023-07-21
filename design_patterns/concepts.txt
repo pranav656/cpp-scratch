@@ -1,0 +1,41 @@
+A static member is shared by all objects of the class
+
+The general principle of agile programming, known as You Aren't Gonna Need
+It (YAGNI), dictates that an implementation that is sufficient for the needs of today should
+be preferred over a more general one.
+
+
+Possible Interview questions:
+When to use virtual destructors and why?
+
+https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors
+
+Protected members can be accessed by derived classes and friend functions
+
+
+Modes of Inheritance: There are 3 modes of inheritance.
+
+Public Mode: If we derive a subclass from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in the derived class.
+Protected Mode: If we derive a subclass from a Protected base class. Then both public members and protected members of the base class will become protected in the derived class.
+Private Mode: If we derive a subclass from a Private base class. Then both public members and protected members of the base class will become Private in the derived class.
+
+
+Solid Principles:
+S: Single responsibility
+
+O : Open Closed Principle
+
+L : Liskov substiution principle
+
+A subclass should satisy the behavioral expectations of the Baseclass, i.e: it should be replacable
+
+I: Interface Segregation Principle:
+Segregate Interfaces
+
+D: Dependency Inversion Principle
+High Level modules should not depend on low level modules but on abstractions.
+Abstractions should not depend on or leak details from the implementation details.
+
+Introduce abstractions after weighing the benefits
+
+
