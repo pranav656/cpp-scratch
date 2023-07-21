@@ -14,6 +14,7 @@ using namespace std;
 class OddEvenMonitor
 {
     public:
+        // initialized only once
         static const bool ODD_TURN = true;
         static const bool EVEN_TURN = false;
         OddEvenMonitor() : turn_(ODD_TURN) {}
@@ -28,6 +29,8 @@ class OddEvenMonitor
         }
 
         void ToggleTurn() {
+            // replacable with unique lock?
+            // mutex released on scope exit
             lock_guard<mutex> lock(mx_);
             turn_ = !turn_;
             cond_.notify_one();
@@ -42,6 +45,7 @@ void OddThread(OddEvenMonitor& monitor)
 {
    for(int i = 1; i<=100; i+=2)
    {
+       // wait and toggle turns
        monitor.WaitTurn(OddEvenMonitor::ODD_TURN);
        cout<< i << endl;
        monitor.ToggleTurn();
@@ -60,7 +64,7 @@ void EvenThread(OddEvenMonitor& monitor)
 
 int main() { 
    OddEvenMonitor o;
-    thread th1(OddThread, ref(o));
+   thread th1(OddThread, ref(o));
    thread th2(EvenThread, ref(o));
    th1.join();
    th2.join();
