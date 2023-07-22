@@ -1,0 +1,1 @@
+Visualize the problem as a tree and solve it with recursion first and test it for some cases. Afterwards make it efficient with memoization for example. 
