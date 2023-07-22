@@ -14,12 +14,14 @@ The base case is that row and column 0 have just one way of reaching
 of this case, i.e DP[x][y] = DP[x-1][y-1] where x and y indicate
 incremental moves in horizontal or vertical directions.
 
+Time complexity is O(m*n), space complexity is the size of the DP table
+which is O(m*n)?
 */
 
 using namespace std;
-int CountWaysToEnd(int m, int n)
+long long CountWaysToEnd(int m, int n)
 {
-    int dp[m][n] ={{0}};
+    long long dp[m][n] ={{0}};
     for (int i = 0; i<m; i++)
     {
         for(int j = 0;j<n; j++)
@@ -32,6 +34,6 @@ int CountWaysToEnd(int m, int n)
 }
 
 int main() { 
-   cout<<CountWaysToEnd(2, 3);
+   cout<<CountWaysToEnd(18, 18);
     return 0;
 }
