@@ -20,7 +20,9 @@ using namespace std;
 // the subsequent target strings. So, on each level, you would have to 
 // n different recursions on each level, hence o(n^m). The multiplication
 // by m is because we search for the occurence of the word in the target and slice the 
-// target. This operation takes m time, so total complexity is O(n^m * m)
+// target. This operation takes m time, so total complexity is O(n^m * m). Space 
+// complexity is O(m*m = m^2) which is O(m) for the recursion tree and O(m) for every time
+// you store a slice of a string in one of the recursion calls.
 bool canConstructRec(string target, const vector<string>& wordBank)
 {
     if(target.empty()) return true;
