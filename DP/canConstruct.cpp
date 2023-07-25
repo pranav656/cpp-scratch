@@ -104,7 +104,9 @@ bool canConstructDPTable(string target, const vector<string>& wordBank)
     for(int i = 0; i<=target.size(); i++)
     {
         // Iterate through only if the current index 
-        // evaluates to true. Why?
+        // evaluates to true. It is not possible to
+        // generate substrings at this position 
+        // from the list of given words
         if(dp[i])
         {
            for(auto& word: wordBank)
