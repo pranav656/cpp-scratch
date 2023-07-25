@@ -79,6 +79,53 @@ bool canConstructMem(string target, const vector<string>& wordBank)
     return false;   
 }
 
+// Below is the tabular DP method of solving the problem.
+// The table represents the substring that can be constructed.
+// You have size of target+1 as the size of the DP table
+// because the position at index i gives the possibility
+// to construct the string at that point. At zero,
+// you represent if it's possible to get an empty string
+// and at the last index it represents the complete target.
+// Since it starts with a empty string, you can start the
+// 0th index with the boolean true and rest to be false.
+// As you iterate through the array index, you will look
+// characters ahead from the current index and
+// mark them as true if they are possible to be constructed from
+// the existing words in the word bank. The time complexity
+// is O(m*n*m) as we iterate through every element in the target (m)
+// and check against the words in the word bank(n*m). Space complexity
+// is O(m) since we only need the table to store the intermediate results.
+bool canConstructDPTable(string target, const vector<string>& wordBank)
+{
+    vector<bool> dp(target.size()+1, false);
+    // It's possible to construct the empty string always
+    dp[0] = true;
+
+    for(int i = 0; i<=target.size(); i++)
+    {
+        // Iterate through only if the current index 
+        // evaluates to true. Why?
+        if(dp[i])
+        {
+           for(auto& word: wordBank)
+           {
+              // to ensure that the substring does 
+              // not go out of range
+              if(i + word.size() <= target.size())
+              {
+                 // If the word matches the characters
+                 // starting at position i
+                  if(target.substr(i, word.size()) == word)
+                  {
+                      dp[i+word.size()] = true;
+                  }
+              }
+           }
+        }
+    }
+
+    return dp[target.size()];
+}
 
 int main() {
    cout<<canConstructRec("abcd", {"ab", "abc", "cd", "def", "abcd"});
@@ -88,4 +135,8 @@ int main() {
    cout<<canConstructMem("abcd", {"ab", "abc", "cd", "def", "abcd"});
    cout<<canConstructMem("skateboard", {"bo", "rd", "ate", "t", "ska", "sk", "boar"});
    cout<<canConstructMem("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", {"e", "ee", "eee", "eeee", "eeeee"});
+   cout<<canConstructDPTable("abcd", {"ab", "abc", "cd", "def", "abcd"});
+   cout<<canConstructDPTable("skateboard", {"bo", "rd", "ate", "t", "ska", "sk", "boar"});
+   cout<<canConstructDPTable("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", {"e", "ee", "eee", "eeee", "eeeee"});
+   return 0;
 }
