@@ -86,6 +86,7 @@ string AlienOrder(vector<string> words)
           if(w1[j] != w2[j])
           {
               adjacency_list[w1[j]].insert(w2[j]);
+              break;
           }
       }
    }
