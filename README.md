@@ -6,6 +6,7 @@ to keep a record of things I am learning. May end up in an organized PDF with te
 and optimizations some day.
 
 Problems taken from youtube videos, Blind75, Elements of Programming Interviews or Leetcode.
+I also plan to add protypes of interesting concepts I am learning.
 
 # Resources
 https://cp-algorithms.com/index.html
