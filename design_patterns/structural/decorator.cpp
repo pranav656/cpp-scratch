@@ -41,7 +41,8 @@ class Ogre : public Unit {
    public:
    using Unit::Unit;
    double attack() {return strength_ + club_penalty_;}
-   double defense() { return armor_ + leather_penalty_;}
+   double defense() {
+       return armor_ + leather_penalty_;}
 
    protected:
    static constexpr double club_penalty_ = -1;
@@ -51,14 +52,18 @@ class Ogre : public Unit {
 // This class is templatized so that
 // you can have special units specific to 
 // each subtype (like special knight, special ogre)
+// and also to prevent changes to unit every single 
+// time you want to add a special kind of object
 template <typename U>
 class SpecialUnit : public U
 {
    public:
+   // transfer ownership via rvalue references
    SpecialUnit(U&& unit, double strength_bonus, double armor_bonus) : 
    U(unit), strength_bonus_(strength_bonus), armor_bonus_(armor_bonus)
    {}
-
+   double attack() {return U::attack() + strength_bonus_;}
+   double defense() {return U::defense() + armor_bonus_;}   
    private:
    double strength_bonus_;
    double armor_bonus_;
@@ -67,5 +72,12 @@ class SpecialUnit : public U
 
 int main()
 {
+    Knight k1(5, 6);
+    Ogre o1(1, 2);
+    cout<<k1.hit(o1)<<endl; // Hit succesful
+    SpecialUnit<Ogre> o2(move(o1), 7, 15); //Ogre evolves
+    cout<<k1.hit(o2)<<endl; // Hit fail
+    SpecialUnit<Knight> k2(move(k1), 15, 20); // Knight evolves
+     cout<<k2.hit(o2)<<endl; // Hit success again
     
 }
