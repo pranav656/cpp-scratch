@@ -1,13 +1,11 @@
 A static member is shared by all objects of the class
+A friend function is sometimes used for testing classes (code smell?)
 
 The general principle of agile programming, known as You Aren't Gonna Need
 It (YAGNI), dictates that an implementation that is sufficient for the needs of today should
 be preferred over a more general one.
 
-
-Possible Interview questions:
 When to use virtual destructors and why?
-
 https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors
 
 Protected members can be accessed by derived classes and friend functions
