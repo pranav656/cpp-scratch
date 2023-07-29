@@ -17,4 +17,11 @@ create the thread).
 Conditional variables are used to notify other threads.
 Notify one/Notify all:
 Notify one thread or all
- 
+
+Atomic is a templated data type. Atomic is not copyable or movable, so a vector of atomics is not possible. You 
+can create a unique pointer to an atomic object but it will not be movable. The templated type (T) used for atomics
+must be copyable and movable. T cannot have a user defined copy constructor and some other rules. Atomics
+were added to prevent race conditions. Using an atomic data type ensures that anything that accesses this data will be safe 
+from data races. Four possible operations store/load, exchange, compare and exchange.
+Reading from an uninitalized atomic int is undefined behavior like a regular int. From C++20, the int will be initialized
+to zero
