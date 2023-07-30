@@ -21,3 +21,14 @@ during down casting. When using dynamic cast, if the cast is successful the dyna
 else a `nullptr` is returned. If the dynamic cast is done to a reference type then it throws a `bad_cast` exception. There is
 a performance overhead with using dynamic cast because it check objects at runtime with runtime type information (RTTI). So use it
 only when necessary or use `static_cast` instead.
+
+`reinterpret_cast` : It can convert any pointer to another pointer. So it can be dangerous if you don't know what you are doing.
+It can be helpful in situations where you understand the memory allocation of the objects and you understand the behavior. Also note
+that this can make the code not portable between platform as the memory allocations may vary from platform to platform.
+
+`const_cast` : This cast can be used to change the constant or volatile qualifiers of pointers or references. Only a pointer, 
+a reference or a pointer to member type can be converted using `const_cast`. It removes the constness of your variable. If you try
+to reassign a variable which was declared as const orginally by using const_cast you  might get undefined behavior. You can 
+modify objects which were not const in the first place but were referred to with const pointer with const_cast, that should not
+have any impact. You can use const cast when you have to pass const objects which are not modified to functions which take
+non const arguments as parameters. 
