@@ -21,3 +21,5 @@ char bytes[4];
 int val;
 };
 ```
+
+You could access the byte level data of val using the bytes array. 
