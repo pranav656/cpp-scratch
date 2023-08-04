@@ -25,6 +25,8 @@ Relaxed: Safe from torn read/writes. safe from clobbered updates, no synchroniza
 
 # Notes from talk C++11/14/17 atomics and memory model:
 [Video link](https://www.youtube.com/watch?v=DS2m7T6NKZQ&t=3s)
+
+
 C++ Memory model goal: Maximize performance but still maintain portability
 
 Iron Triangle of Parallel Programming: Performance, General Portability and Productivity
