@@ -48,7 +48,7 @@ numbers are passed to the sum function
 
 ```c++
 
-template<typename T> requires std::is_arithmetic<T>
+template<typename T> requires std::is_arithmetic<T>::value
 T sum(T a, T b)
 {
 	return a +b;
