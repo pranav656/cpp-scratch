@@ -1,4 +1,4 @@
-
+# Notes from [playlist](https://www.youtube.com/watch?v=VBI6TSo8Zog&list=PLWxziGKTUvQFIsbbFcTZz7jOT4TMGnZBh)
 
 You can use type traits to find the trait of a type during compile time. You can check if a type is a pointer with the 
 following piece of code
