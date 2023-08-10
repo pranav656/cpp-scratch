@@ -130,3 +130,97 @@ void print_tuple(TUPLE&& t){
 
 ```
 
+# Simple Metaprogramming library to check if a type is in a list
+
+```c++
+
+#include <iostream>
+#include <type_traits>
+
+// template function to return type based on compile time conditions
+template<bool condition, typename THEN, typename ELSE>
+struct if_;
+
+template<typename THEN, typename ELSE>
+struct if_<true, THEN, ELSE>{
+  using type = THEN;
+};
+
+template<typename THEN, typename ELSE>
+struct if_<false, THEN, ELSE>{
+  using type = ELSE;
+};
+
+template<typename...>
+struct type_list{};
+
+template<typename LIST>
+struct empty : std::false_type{};
+
+template<>
+struct empty<type_list<>> : std::true_type{};
+
+static_assert(empty<type_list<>>::value);
+
+template<typename LIST>
+struct front;
+
+template<typename T0, typename ... T1toN>
+struct front<type_list<T0, T1toN...>>{
+    using type = T0;
+};
+
+static_assert(std::is_same_v<front<type_list<int, float>>::type, int> );
+
+
+template <typename LIST>
+struct pop_front;
+
+template<typename T0, typename ... T1toN>
+struct pop_front<type_list<T0, T1toN...>> {
+    using type = type_list<T1toN...>;
+};
+
+static_assert(std::is_same_v<pop_front<type_list<int, float>>::type, type_list<float>>);
+
+// use aliases to refer to front, same naming convention
+// as standard library
+template<typename LIST>
+using front_t = typename front<LIST>::type;
+
+template<typename LIST>
+using pop_front_t = typename pop_front<LIST>::type;
+ 
+template<typename SEARCH, typename LIST>
+struct contains_type;
+
+template<typename SEARCH, typename LIST>
+struct contains_type:
+    if_<
+            std::is_same_v<SEARCH, front_t<LIST>>,
+            std::true_type,
+            contains_type<SEARCH, pop_front_t<LIST>>
+            >::type
+{};
+
+
+template<typename SEARCH>
+struct contains_type<SEARCH, type_list<>> : std::false_type
+{};
+
+int main()
+{
+    type_list<int, bool, double> types;
+
+    // evaluates to true
+    std::cout<<std::boolalpha<<
+        contains_type<int, decltype(types)>::value<<std::endl;
+     // evaluates to false
+    std::cout<<std::boolalpha<<
+        contains_type<char, decltype(types)>::value<<std::endl;  
+     // evaluates to false
+    std::cout<<std::boolalpha<<
+        contains_type<bool, type_list<>>::value<<std::endl;    
+}
+
+```
