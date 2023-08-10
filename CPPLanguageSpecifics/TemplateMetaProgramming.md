@@ -95,4 +95,38 @@ std::cout<<std::boolalpha<<contains_type<char, decltype(t2)>::value <<std::endl;
 
 ```
 
+# Example on variadic templates
+
+```c++
+void printn()
+{
+    std::cout<< " " <<std::endl;    
+}
+
+template<typename LAST>
+void printn(LAST&& t)
+{
+    std::cout<< std::forward<LAST>(t) <<std::endl;
+}
+
+template<typename T0, typename ...T1toN>
+void printn(T0&& t, T1toN... rest){
+    std::cout<< std::forward<T0>(t) <<" ";
+    printn(std::forward<T1toN>(rest)...);
+}
+
+template<typename TUPLE, std::size_t ... indices>
+void print_tuple_impl(TUPLE &&t, std::index_sequence<indices...>) {
+    printn(std::get<indices>(std::forward<TUPLE>(t))...);
+}
+
+// Template metafunction to print tuples
+template<typename TUPLE>
+void print_tuple(TUPLE&& t){
+    // index sequence makes a series of indices that can be used by the 
+    // implementation 
+    print_tuple_impl(std::forward<TUPLE>(t), std::make_index_sequence<std::tuple_size<std::remove_reference_t<TUPLE>>::value>{});
+}
+
+```
 
