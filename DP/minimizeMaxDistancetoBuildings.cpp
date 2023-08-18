@@ -23,9 +23,9 @@ need to walk.
 
 using namespace std;
 
-int findMaxPossibleDistance(vector<vector<bool>> buildings)
+pair<int,int> findMaxPossibleDistance(vector<vector<bool>> buildings)
 {
-    int res = INT_MAX;
+    int res = INT_MAX, pos = 0;
     // last element of this array 
     vector<int> distances = vector<int>(buildings[0].size()+1, INT_MAX);
     // Init DP table with inf distances
@@ -36,8 +36,9 @@ int findMaxPossibleDistance(vector<vector<bool>> buildings)
         {
             dp[0][j] = 0;
         }
-        dp[0][buildings[0].size()] = max(dp[0][buildings[0].size()], dp[0][j]);
-        res = min(res, dp[0][buildings[0].size()]); 
+        // for the case where there is only one 
+       dp[0][buildings[0].size()] = max(dp[0][buildings[0].size()], dp[0][j]);
+       res = min(res, dp[0][buildings[0].size()]); 
     }
     for(int i = 1; i<buildings.size(); i++)
     {
@@ -53,12 +54,13 @@ int findMaxPossibleDistance(vector<vector<bool>> buildings)
                     dp[i][j] = min(dp[i][j], dp[i-1][j]+1);
                 }
             dp[i][buildings[0].size()] = max(dp[i][buildings[0].size()], dp[i][j]);
-
         }
+        // cout<<dp[i][buildings[0].size()]<<endl;
     }
-    // problematic loop, debug later
     for(int i = buildings.size()-2; i>=0; i--)
     {
+        //cout<<i<<endl;
+        int max_d = 0;
         for(int j = 0; j<buildings[0].size(); j++)
         {
             if(buildings[i][j])
@@ -69,14 +71,16 @@ int findMaxPossibleDistance(vector<vector<bool>> buildings)
             {
                 dp[i][j] = min(dp[i][j], dp[i+1][j]+1);
             }
-            if(dp[i][j] != INT_MAX)
-            {
-                dp[i][buildings[0].size()] = max(dp[i][buildings[0].size()], dp[i][j]);
-            }    
-            res = min(res, dp[i][buildings[0].size()]);
+            max_d = max(dp[i][j], max_d);
+        }
+        dp[i][buildings[0].size()] = max_d;
+        if( dp[i][buildings[0].size()] < res)
+        {
+            pos = i;
+            res = dp[i][buildings[0].size()];
         }
     }
-    return res;
+    return std::make_pair(res, pos);
 }
 
 int main() { 
@@ -85,6 +89,7 @@ int main() {
                                     {true, true, false}, 
                                     {false, true, false}, 
                                     {false, true, true}};
-    cout<<findMaxPossibleDistance(buildings);
+    auto result = findMaxPossibleDistance(buildings);
+    cout <<"maximum walking distance is "<< result.first << " at block " << result.second << endl;
     return 0;
 }
