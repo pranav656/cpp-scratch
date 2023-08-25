@@ -51,6 +51,22 @@ int main() {
         if(!distrusting_pair)
         {
             cout<<"APPROVE"<<endl;
+            if(graph.find(c1) != graph.end())
+            {
+                for(int edge : graph[c1])
+                {
+                    graph[c2].insert(edge);
+                }
+            }
+            
+            if(graph.find(c2) != graph.end())
+            {
+                for(int edge : graph[c2])
+                {
+                    graph[c1].insert(edge);
+                }
+            }
+            
         }
         else
         {
