@@ -51,6 +51,8 @@ int main() {
         if(!distrusting_pair)
         {
             cout<<"APPROVE"<<endl;
+           // Probable bug: The merging of countries is 
+           // not correct
             if(graph.find(c1) != graph.end())
             {
                 for(int edge : graph[c1])
