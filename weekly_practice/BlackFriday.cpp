@@ -2,8 +2,6 @@
 #include <bits/stdc++.h>
 /*
 https://open.kattis.com/contests/cgbkbq/problems/blackfriday
-
-(Not yet solved, TODO)
 */
 
 using namespace std;
@@ -28,19 +26,22 @@ int main() {
             counts[d].second.push_back(i+1);
         }
     }
-    int winner = -1;
+    int max = -1, winner = -1;
     for(const auto& it : counts)
     {
-        cout<<it.second.first<<endl;
-        if(it.second.first == 1 && it.second.second.size() == 1)
+        //cout<<it.second.second.size()<<endl;
+        if ((it.second.first == 1) && (it.second.second.size() == 1))
         {
-            winner = max(winner, it.second.second[0]);
-            //cout<<winner<<endl;
+            if(it.first > max)
+            {
+                max = it.first;
+                winner = it.second.second[0];
+            }
         }
     }
 
-  /* if(winner != -1 ) cout<<winner<<endl;
-   else cout<<"None"<<endl;*/
+   if(winner != -1 ) cout<<winner<<endl;
+   else cout<<"None"<<endl;
    
    return 0;
 }
