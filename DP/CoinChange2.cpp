@@ -2,6 +2,9 @@
 // is that you need to return the number of 
 // combinations that lead to the amount. So instead of minimizing
 // it, just keep accumulating the combinations for each amount.
+// We are iterating through the coins because we don't want 
+// duplicate solutions to be added. i.e. the same combination of coins
+// to be added twice.
 // Same problem as combination sum. 
 
 class Solution {
