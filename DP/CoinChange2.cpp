@@ -5,7 +5,8 @@
 // We are iterating through the coins because we don't want 
 // duplicate solutions to be added. i.e. the same combination of coins
 // to be added twice.
-// Same problem as combination sum. 
+// Same problem as combination sum. Time complexity: O(a*c)
+// Space complexity: O(a)
 
 class Solution {
 public:
