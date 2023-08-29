@@ -2,7 +2,6 @@
 /*
 
 https://open.kattis.com/contests/cgbkbq/problems/dunglish
-TOSOLVE: Works only for the basic cases, not fully accepted solution
 */
 
 #include <bits/stdc++.h>
@@ -11,17 +10,15 @@ using namespace std;
 
 int main()
 {
-    unordered_map<string, vector<string>> correct_words_dict;
-    unordered_map<string, vector<string>> incorrect_words_dict;
-    vector<string> sentence;
+    unordered_map<string, int> correct_words_cnt;
+    unordered_map<string, int> incorrect_words_cnt;
+    unordered_map<string, string> translation;
     int num_words;
     cin>>num_words;
-
+    vector<string> sentence(num_words);
     for(int i = 0; i<num_words; i++)
     {
-        string word;
-        cin>>word;
-        sentence.push_back(word);
+        cin>>sentence[i];
     }
 
     int num_translations;
@@ -30,56 +27,39 @@ int main()
     {
         string dutch_word, english_word, c_or_w;
         cin>>dutch_word>>english_word>>c_or_w;
+        translation[dutch_word]=english_word; 
         if(c_or_w == "correct")
         {
-            correct_words_dict[dutch_word].push_back(english_word);
+            correct_words_cnt[dutch_word]++;
         }
         else if(c_or_w == "incorrect")
         {
-            incorrect_words_dict[dutch_word].push_back(english_word);
+            incorrect_words_cnt[dutch_word]++;
         }
     }
-    int total_combinations = 1;
-    int total_correct_combinations = 1;
-    int total_incorrect_combinations = 0;
+    unsigned long long total_combinations = 1;
+    unsigned long long total_correct_combinations = 1;
     for(auto word : sentence)
     {
-       total_combinations *= correct_words_dict[word].size() +  incorrect_words_dict[word].size();
-       total_correct_combinations *= correct_words_dict[word].size();
+       total_combinations *= correct_words_cnt[word] +  incorrect_words_cnt[word];
+       total_correct_combinations *= correct_words_cnt[word];
     }
-    total_incorrect_combinations = total_combinations - total_correct_combinations;
+    unsigned long long total_incorrect_combinations = total_combinations - total_correct_combinations;
 
-    vector<string> only_potential_answer;
     if(total_combinations == 1)
     {
         for(auto word: sentence)
         {
-            if(correct_words_dict[word].size() != 0)
-            {
-                only_potential_answer.push_back(correct_words_dict[word][0]); 
-            }
-            else if (incorrect_words_dict[word].size() != 0)
-            {
-
-                only_potential_answer.push_back(incorrect_words_dict[word][0]);
-            }
-        }
-        for(int i = 0; i<only_potential_answer.size(); i++)
-        {
-                cout<<only_potential_answer[i];
-                if(i != only_potential_answer.size() -1 )
-                {
-                    cout<<" ";
-                }       
+            cout<<translation[word]<<" ";
         }
         cout<<endl;
-        if(total_incorrect_combinations == 1)
+        if(total_correct_combinations == 1)
         {
-            cout<<"incorrect"<<endl;
+            cout<<"correct"<<endl;
         }
         else
         {
-            cout<<"correct"<<endl;
+            cout<<"incorrect"<<endl;
         }
     }
     else 
