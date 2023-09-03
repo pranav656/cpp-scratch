@@ -25,7 +25,7 @@ int main()
     while(n != 0 && m != 0)
     {
         unordered_set<int> visited;
-        double min_distance = DBL_MAX;
+        double min_distance = DBL_MIN;
         unordered_map<int, vector<pair<int, double>> > edges;
         cin>>n>>m;
         for(int i = 0; i<m; i++)
@@ -57,22 +57,28 @@ int main()
                     // add the distance of the node to the visited 
                     // Note: can be confusing as heap as distance first 
                     
-                    double dist;
-                    if(minDistanceNode.d == 0.0)
+                    double dist = minDistanceNode.d * edge.second;
+                    
+                   /* if(minDistanceNode.d == 0.0)
                     {
                         dist = edge.second;
                     }
                     else
                     {
                         dist = minDistanceNode.d * edge.second;
-                    }
+                    }*/
                     minHeap.emplace(Node( dist , edge.first));
                     if(edge.first == n - 1)
                     {
-                        min_distance = min(min_distance, dist);
-                        cout<<n-1<<" "<<min_distance<<endl;
+                        min_distance = max(min_distance, dist);
+                        //cout<<n-1<<" "<<min_distance<<endl;
                     }
                 }
+            }
+
+            if(visited.size() == m - 1)
+            {
+                cout<<n-1<<" "<<min_distance<<endl;
             }
         }
     }    
