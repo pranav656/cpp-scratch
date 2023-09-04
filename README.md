@@ -12,5 +12,6 @@ I also plan to add protypes of interesting concepts I am learning.
 https://cp-algorithms.com/index.html
 
 ## Dynamic Programming
-https://www.quora.com/How-can-one-start-solving-dynamic-programming-problems
-https://www.quora.com/What-is-divide-and-conquer-optimization-in-dynamic-programming
+[https://www.quora.com/How-can-one-start-solving-dynamic-programming-problems]
+
+[https://www.quora.com/What-is-divide-and-conquer-optimization-in-dynamic-programming]
