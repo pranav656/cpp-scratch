@@ -3,14 +3,130 @@
 /*
 https://open.kattis.com/contests/cgbkbq/problems/islandalliances
 
-ONLY WORKS FOR THE BASIC CASE(TODO).
-Open question: SHould the graph be dynamically updated to reflect approved proposals?
+3rd attempt: Stopped working for the basic cases, retry after a few days.
 */
 
 using namespace std;
 using ull = unsigned long long;
 
-map<int, set<int>*> graph;
+vector<pair<set<int>, set<int>>> merged_islands_relationship;
+
+
+void construct_relationship(int u, int v)
+{
+    bool ufound = false, vfound = false;
+    for (int i = 0; i<merged_islands_relationship.size(); i++)
+    {
+        if(merged_islands_relationship[i].first.find(u) != merged_islands_relationship[i].first.end())
+        {
+            ufound = true;
+            //cout<<"merging with existing "<<u<<":"<<v<<endl;
+            merged_islands_relationship[i].second.insert(v);
+            /*for(auto it : merged_islands_relationship[i].second)
+            {
+                cout<<it<<endl;
+            }*/
+        }
+        if(merged_islands_relationship[i].first.find(v) != merged_islands_relationship[i].first.end())
+        {
+            vfound = true;
+            //cout<<"merging with existing "<<v<<":"<<u<<endl;
+            merged_islands_relationship[i].second.insert(u);
+            /*for(auto it : merged_islands_relationship[i].second)
+            {
+                cout<<it<<endl;
+            }*/
+        }
+    }
+    if(!ufound)
+    {
+        set<int> island;
+        island.insert(u);
+        set<int> disagreeing_island;
+        disagreeing_island.insert(v);
+        merged_islands_relationship.push_back(make_pair(island, disagreeing_island));
+    }
+    if(!vfound)
+    {
+        //cout<<"merging "<<v<<":"<<u<<endl;
+        set<int> island;
+        island.insert(v);
+        set<int> disagreeing_island;
+        disagreeing_island.insert(u);
+        merged_islands_relationship.push_back(make_pair(island, disagreeing_island));
+    }
+}
+
+bool mergable(int u, int v)
+{
+    bool u_found = false, v_found=false;
+    int u_idx = -1, v_idx = -1;
+    for (int i = 0; i<merged_islands_relationship.size(); i++)
+    {
+        
+        if(merged_islands_relationship[i].first.find(u) != merged_islands_relationship[i].first.end())
+        {
+            u_found=true;
+            u_idx = i;
+            if(merged_islands_relationship[i].second.find(v) != merged_islands_relationship[i].second.end())
+            {
+                cout<<"refused at u_idx:"<<u_idx<<endl;
+                return false;
+            }
+        }
+        if(merged_islands_relationship[i].first.find(v) != merged_islands_relationship[i].first.end())
+        {
+            v_found=true;
+            v_idx = i;
+            if(merged_islands_relationship[i].second.find(u) != merged_islands_relationship[i].second.end())
+            {
+                cout<<"refused at v_idx:"<<i<<endl;
+                return false;
+            }
+        }
+    }
+    if(u_idx != v_idx)
+    {
+    if(u_found)
+    {
+        merged_islands_relationship[u_idx].first.insert(v);
+        if(v_found)
+        {
+            for(auto it : merged_islands_relationship[v_idx].second)
+            {
+                merged_islands_relationship[u_idx].first.insert(it);
+            }
+            merged_islands_relationship.erase(merged_islands_relationship.begin()+v_idx);
+            // set false so that next condition is not evaluated 
+            // to avoid double merge
+            v_found = false;
+        }
+    }
+    if(v_found)
+    {
+        merged_islands_relationship[v_idx].first.insert(u);
+        if(u_found)
+        {
+            for(auto it : merged_islands_relationship[v_idx].second)
+            {
+                merged_islands_relationship[u_idx].first.insert(it);
+            }
+            merged_islands_relationship.erase(merged_islands_relationship.begin()+u_idx);
+        }
+    }
+        }
+    if(!u_found && !v_found)
+    {
+        set<int> island;
+        island.insert(u);
+        island.insert(v);
+        set<int> d_island;
+        merged_islands_relationship.push_back(make_pair(island, d_island));
+    }
+    
+    return true;
+}
+
 
 int main() {
    ull n, m , q;
@@ -19,95 +135,21 @@ int main() {
     {  
         int u, v;
         cin >> u >> v;
-        if(graph[u] == nullptr)
-        {
-            graph[u] = new set<int>();
-            graph[u]->insert(v);
-        }
-        else
-        {
-            graph[u]->insert(v);
-        }
-        if(graph[v] == nullptr)
-        {
-            graph[v] = new set<int>();
-            graph[v]->insert(u);
-        }
-        else
-        {
-            graph[v]->insert(u);
-        }
+        construct_relationship(u, v);
     }
-
-    for(int i = 0; i<q; i++)
+    for(int i = 0; i< q; i++)
     {
-        int c1, c2;
-        cin>>c1>>c2;
-        bool distrusting_pair = false;
-        if(graph.find(c1) != graph.end())
-        {
-            if(graph[c1]->find(c2) != graph[c1]->end())
+            int u,v;
+            cin>>u>>v;
+            if(mergable(u,v))
             {
-                distrusting_pair = true;
+                cout<<"APPROVE"<<endl;
             }
-        }
-        else if(graph.find(c2) != graph.end())
-        {
-            if(graph[c2]->find(c1) != graph[c2]->end())
+            else
             {
-                distrusting_pair = true;
+                cout<<"REFUSE"<<endl;
             }
-        }
-        else
-        {
-            distrusting_pair = false;
-        }
-
-       if(!distrusting_pair)
-        {
-            cout<<"APPROVE"<<endl;
-            set<int>* merged_set = new set<int>();
-            //merge still wrong
-           if(graph.find(c1) != graph.end() && graph[c1] != graph[c2])
-           {
-               if(graph[c1] != nullptr)
-               { 
-                    set<int> original_set_c1 = *graph[c1];
-                    for(int i : original_set_c1)
-                    {
-                        merged_set->insert(i);
-                    }
-                    delete graph[c1];
-                    graph[c1] = nullptr;
-                }
-           }
-            
-           if(graph.find(c2) != graph.end())
-           {
-               if(graph[c2] != nullptr)
-               {
-                      set<int> original_set_c2 = *graph[c2];
-                      for(int i : original_set_c2)
-                      {
-                        merged_set->insert(i);
-                      }
-                      delete graph[c2];
-                      graph[c2] = nullptr;           
-               }
-           }
-            graph[c1] = merged_set;
-            graph[c2] = merged_set;
-            
-        }
-        else
-        {
-            cout<<"REFUSE"<<endl;
-        }
-    }
-    set<int> *a = graph[1];
-    for(auto i : *a)
-    {
-        cout<<i<<endl;        
+        
     }
    return 0;
 }
