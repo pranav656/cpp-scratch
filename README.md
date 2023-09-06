@@ -19,3 +19,5 @@ https://www.quora.com/What-is-divide-and-conquer-optimization-in-dynamic-program
 # Problems to retry later
 https://open.kattis.com/problems/islandalliances
 
+https://open.kattis.com/problems/centsavings
+
