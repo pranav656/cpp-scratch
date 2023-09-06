@@ -4,6 +4,8 @@
 https://open.kattis.com/contests/cgbkbq/problems/islandalliances
 
 3rd attempt: Stopped working for the basic cases, retry after a few days.
+
+Use union find
 */
 
 using namespace std;
