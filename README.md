@@ -15,3 +15,7 @@ https://cp-algorithms.com/index.html
 https://www.quora.com/How-can-one-start-solving-dynamic-programming-problems
 
 https://www.quora.com/What-is-divide-and-conquer-optimization-in-dynamic-programming
+
+# Problems to retry later
+https://open.kattis.com/problems/islandalliances
+
