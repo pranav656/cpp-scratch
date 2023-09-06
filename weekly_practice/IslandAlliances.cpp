@@ -92,9 +92,13 @@ bool mergable(int u, int v)
         merged_islands_relationship[u_idx].first.insert(v);
         if(v_found)
         {
-            for(auto it : merged_islands_relationship[v_idx].second)
+            for(auto it : merged_islands_relationship[v_idx].first)
             {
                 merged_islands_relationship[u_idx].first.insert(it);
+            }
+            for(auto it : merged_islands_relationship[v_idx].second)
+            {
+                merged_islands_relationship[u_idx].second.insert(it);
             }
             merged_islands_relationship.erase(merged_islands_relationship.begin()+v_idx);
             // set false so that next condition is not evaluated 
@@ -107,9 +111,13 @@ bool mergable(int u, int v)
         merged_islands_relationship[v_idx].first.insert(u);
         if(u_found)
         {
-            for(auto it : merged_islands_relationship[v_idx].second)
+            for(auto it : merged_islands_relationship[u_idx].first)
             {
-                merged_islands_relationship[u_idx].first.insert(it);
+                merged_islands_relationship[v_idx].first.insert(it);
+            }
+            for(auto it : merged_islands_relationship[u_idx].second)
+            {
+                merged_islands_relationship[v_idx].second.insert(it);
             }
             merged_islands_relationship.erase(merged_islands_relationship.begin()+u_idx);
         }
