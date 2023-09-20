@@ -1,3 +1,11 @@
+
+
+/*
+Palindrome Partitioning (Leet Code 131):
+Check every single combination of partitions and check 
+if they are all palindromes. This can be done with backtracking
+*/
+
 class Solution {
 
 
