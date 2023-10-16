@@ -4,14 +4,13 @@
 
 using namespace std;
 
-
-
 int main()
 {
     int R, C;
     cin>>R>>C;
+    array<short, 9> ans = {0, 0, 0, 0, 0, 0, 0, 0, 0}; 
     vector<vector<bool>> rc(C, vector<bool>(R, false));
-    vector<vector<short>> n(C, vector<int>(R, false));
+    vector<vector<short>> neighbours(C, vector<short>(R, 0));
     int n;
     cin>>n;
     for(int i = 0; i<n; i++)
@@ -20,26 +19,7 @@ int main()
         cin>>r>>c;
         rc[r-1][c-1] = true;
     }
-
-    for(int i = 0; i<R; i++)
-    {
-        for(int j = 0; j<C; j++)
-        {
-            // check eight neighbours
-            if((i-1>=0 && i+1<R) && (j-1>=0 && j+1<C))
-            {
-                if(rc[i-1][j]) n[i][j]++;
-                if(rc[i-1][j-1])n[i][j]++;
-                if(rc[i-1][j+1]) n[i][j]++;
-                if(rc[i+1][j]) n[i][j]++;
-                if(rc[i+1][j-1]) n[i][j]++;
-                if(rc[i+1][j+1]) n[i][j]++;
-                if(rc[i][j+1])n[i][j]++;
-                if(rc[i][j-1]) n[i][j]++;
-            }
-        }
-    }
-    /*for(int i = 0; i< R; i++)
+    /*for(int i = 0; i<R; i++)
     {
         for(int j = 0; j<C; j++)
         {
@@ -47,6 +27,37 @@ int main()
         }
         cout<<endl;
     }*/
+    for(int i = 0; i<R; i++)
+    {
+        for(int j = 0; j<C; j++)
+        {
+            auto checkNeighbour = [&](int x, int y)
+            {
+                if(x > R - 1 || x < 0 || y < 0 || y > C -1) return false;
+                if(rc[x][y]) return true;
+                return false;
+            };
+            if(rc[i][j])
+            {
+                if(checkNeighbour(i+1, j+1)) neighbours[i][j]++;
+                if(checkNeighbour(i+1, j)) neighbours[i][j]++;
+                if(checkNeighbour(i+1, j-1)) neighbours[i][j]++;
+                if(checkNeighbour(i, j+1)) neighbours[i][j]++;
+                if(checkNeighbour(i, j-1)) neighbours[i][j]++;
+                if(checkNeighbour(i-1, j+1)) neighbours[i][j]++;
+                if(checkNeighbour(i-1, j)) neighbours[i][j]++;
+                if(checkNeighbour(i-1, j-1)) neighbours[i][j]++;
+                ans[neighbours[i][j]]++;
+            }
+            //cout<<neighbours[i][j]<<endl;
+        }
+    }
+
+    for(int i = 0; i<9; i++)
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<endl;
     
     return 0;
 }
