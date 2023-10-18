@@ -21,3 +21,9 @@ https://open.kattis.com/problems/islandalliances
 
 https://open.kattis.com/problems/centsavings
 
+# Solved Problems
+
+
+| Topic | Problem                                                                                     | Solution | Description                             |
+|-------|---------------------------------------------------------------------------------------------|----------|-----------------------------------------|
+| Graph | Implement Trie Prefix [Leetcode](https://leetcode.com/problems/implement-trie-prefix-tree/) |          | Standard Trie implementation            |
