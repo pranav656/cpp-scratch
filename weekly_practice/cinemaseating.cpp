@@ -37,18 +37,15 @@ int main()
                 if(rc[x][y]) return true;
                 return false;
             };
-            if(rc[i][j])
-            {
-                if(checkNeighbour(i+1, j+1)) neighbours[i][j]++;
-                if(checkNeighbour(i+1, j)) neighbours[i][j]++;
-                if(checkNeighbour(i+1, j-1)) neighbours[i][j]++;
-                if(checkNeighbour(i, j+1)) neighbours[i][j]++;
-                if(checkNeighbour(i, j-1)) neighbours[i][j]++;
-                if(checkNeighbour(i-1, j+1)) neighbours[i][j]++;
-                if(checkNeighbour(i-1, j)) neighbours[i][j]++;
-                if(checkNeighbour(i-1, j-1)) neighbours[i][j]++;
-                ans[neighbours[i][j]]++;
-            }
+            if(checkNeighbour(i+1, j+1)) neighbours[i][j]++;
+            if(checkNeighbour(i+1, j)) neighbours[i][j]++;
+            if(checkNeighbour(i+1, j-1)) neighbours[i][j]++;
+            if(checkNeighbour(i, j+1)) neighbours[i][j]++;
+            if(checkNeighbour(i, j-1)) neighbours[i][j]++;
+            if(checkNeighbour(i-1, j+1)) neighbours[i][j]++;
+            if(checkNeighbour(i-1, j)) neighbours[i][j]++;
+            if(checkNeighbour(i-1, j-1)) neighbours[i][j]++;
+            ans[neighbours[i][j]]++;
             //cout<<neighbours[i][j]<<endl;
         }
     }
