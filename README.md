@@ -24,6 +24,6 @@ https://open.kattis.com/problems/centsavings
 # Solved Problems
 
 
-| Topic | Problem                                                                                     | Solution | Description                             |
-|-------|---------------------------------------------------------------------------------------------|----------|-----------------------------------------|
-| Graph | Implement Trie Prefix [Leetcode](https://leetcode.com/problems/implement-trie-prefix-tree/) |          | Standard Trie implementation            |
+| Topic | Problem                                                                                       | Solution Link                                                                                 | Description                             |
+|-------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
+| Graph | Implement Trie Prefix - [Leetcode](https://leetcode.com/problems/implement-trie-prefix-tree/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/ImplementTrie.cpp)       | Standard Trie implementation            |
