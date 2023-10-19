@@ -91,7 +91,41 @@ bool canFinish(int numCourses, vector<vector<int>> prereq)
     }
     return true;
 }
-
+/*
+This one is the same approach as above, but
+is much faster due to use of vectors
+in place of hashmaps and sets.
+class Solution {
+public:
+    vector<vector<int>> adjacency_list;
+    vector<int> visited;
+    bool cycle_detected(int node)
+    {
+        if(visited[node]) return true;
+        visited[node] = 1;
+        for(int nei : adjacency_list[node])
+        {
+            if(cycle_detected(nei)) return true;
+        }
+        adjacency_list[node].clear();
+        visited[node] = 0;
+        return false;
+    }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        adjacency_list = vector<vector<int>>(numCourses, vector<int>{});
+        visited = vector<int>(numCourses, 0);
+        for(auto& pre : prerequisites)
+        {
+            adjacency_list[pre[1]].push_back(pre[0]);   
+        }
+        for(int i = 0; i<numCourses; i++)
+        {
+            if(cycle_detected(i)) return false;
+        }
+        return true ;
+    }
+};
+*/
 
 int main() { 
     vector<vector<int>> tc1 = {{1,0}};
