@@ -24,6 +24,7 @@ https://open.kattis.com/problems/centsavings
 # Solved Problems
 The repo contains solutions to 75+ problems, the table below is not upto date. 
 
-| Topic | Problem                                                                                       | Solution Link                                                                                 | Description                             |
+| Topic | Problem                                                                                       | Solution Link                                                                                 | Solution Approach                       |
 |-------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
 | Graph | Implement Trie Prefix - [Leetcode](https://leetcode.com/problems/implement-trie-prefix-tree/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/ImplementTrie.cpp)       | Standard Trie implementation            |
+| Graph | Course Schedule - [LeetCode](https://leetcode.com/problems/course-schedule/description/)      | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/CourseSchedule.cpp)      | Cycle Detection in a graph              |
