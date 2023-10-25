@@ -22,7 +22,7 @@ https://open.kattis.com/problems/islandalliances
 https://open.kattis.com/problems/centsavings
 
 # Solved Problems
-The repo contains solutions to 75+ problems, the table below is not upto date. 
+The repo contains solutions to 75+ problems, the most important problem list will updated below: 
 
 | Topic | Problem                                                                                       | Solution Link                                                                                 | Solution Approach                       |
 |-------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
