@@ -35,3 +35,4 @@ The repo contains solutions to 75+ problems, the table below is not upto date.
 | Graphs | Design Add and Search Words [Leetcode](https://leetcode.com/problems/design-add-and-search-words-data-structure) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/DesignAddAndSearchWords.cpp) | Trie word search implementation |
 | Arrays | Min Stack - [Leetcode](https://leetcode.com/problems/min-stack/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Arrays/MinStack.cpp) | Track min val in stack |
 | Linked Lists | Merge Sorted Lists [Leetcode](https://leetcode.com/problems/merge-two-sorted-lists/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/LinkedList/MergeSortedLists.cpp) | Merge during traversal |
+| Two Pointers | Valid Palindrome [Leetcode](https://leetcode.com/problems/valid-palindrome) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/TwoPointer/ValidPalindrome.cpp) | Two pointer comparison
