@@ -33,3 +33,4 @@ The repo contains solutions to 75+ problems, the table below is not upto date.
 | Graph | Max area of Island - [Leetcode](https://leetcode.com/problems/max-area-of-island/)            | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/MaxAreaofIsland.cpp)     | DFS - Number of connected components |
 | Graph | Pacific Atlantic Water Flow - [Leetcode](https://leetcode.com/problems/pacific-atlantic-water-flow/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Graphs/PacificAtlanticWaterflow.cpp) | DFS - Find reachable nodes |
 | Arrays | Min Stack - [Leetcode](https://leetcode.com/problems/min-stack/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Arrays/MinStack.cpp) | Track min val in stack |
+| Linked Lists | Merge Sorted Lists [Leetcode](https://leetcode.com/problems/merge-two-sorted-lists/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/LinkedList/MergeSortedLists.cpp) | Merge during traversal |
