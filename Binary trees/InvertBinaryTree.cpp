@@ -23,3 +23,29 @@ public:
         return root;
     }
 };
+
+ // LC226 - Invert Binary Tree - BFS approach with queue
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        deque<TreeNode*> q;
+        q.push_back(root);
+        while(!q.empty())
+        {
+            auto curr = q.front();
+            q.pop_front();
+            // ignore if null
+            if(!curr) {
+                continue;
+            }
+            swap(curr->left, curr->right);
+            if(curr->left) {
+                q.push_back(curr->left);
+            }
+            if(curr->right) {
+                q.push_back(curr->right);
+            }
+        }
+        return root;
+    }
+};
