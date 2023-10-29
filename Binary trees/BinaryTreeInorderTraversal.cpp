@@ -18,3 +18,29 @@ public:
         return res;
     }
 };
+
+// Iterative implementation with stack
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        if(root == nullptr) return res;
+        stack<TreeNode*> st;
+        TreeNode* currNode = root;
+
+        while(currNode != nullptr || !st.empty())
+        {
+            // push the left nodes first
+            while(currNode != nullptr) {
+                st.push(currNode);
+                currNode = currNode->left;
+            }
+            TreeNode* poppedNode = st.top();
+            st.pop();
+            //push center node
+            res.push_back(poppedNode->val);
+            currNode = poppedNode->right;
+        }
+        return res;
+    }
+};
