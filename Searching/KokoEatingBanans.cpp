@@ -1,4 +1,4 @@
-// LC875 - Koko Eating Bananas
+// LC875 (Medium) - Koko Eating Bananas
 // The key idea is to look for a rate of eating
 // which will lead to the minum number of hours. 
 // you can start with a l and r end points (based on the
