@@ -30,9 +30,10 @@ class Trie
             TrieNode *curr = root;
             for(char c : word)
             {
-                if(!curr->children[ c- 'a'])
+                
+                if(!curr->children[c- 'a'])
                 {
-                    curr = new TrieNode();
+                    curr->children[c - 'a'] = new TrieNode();
                 }
                 curr = curr->children[c - 'a'];
             }
@@ -64,14 +65,14 @@ public:
         // insert words into Trie
         for(auto word : words)
         {
-            t.insert(word);
+            t->insert(word);
         }
         for(int i = 0; i<rows; i++)
         {
             for(int j = 0; j<cols; j++)
             {
                 string path;
-                dfs(board, i, j, board, path, t->root);
+                dfs(i, j, board, path, t->root);
             }
         }
         return ans;
