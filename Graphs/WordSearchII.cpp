@@ -49,12 +49,26 @@ public:
     Trie *t;
 
     void dfs(int i, int j, vector<vector<char>>& board,    
-            string path, TrieNode* root)
+            string& path, TrieNode* root)
     {
+        if(i == rows || i <0 || j < 0 || j == cols) return;
         char c = board[i][j];
+        if(c == '*') return;
         TrieNode* curr = root->children[c - 'a'];
         if(curr == nullptr) return;
         path = path+c;
+        cout<<c<<endl;
+        // modify board to mark as visited
+        board[i][j] = '*';
+        if (root->isEndOfWord)
+        {
+            set_ans.insert(path);
+        } 
+        dfs(i, j+1, board, path, root);
+        dfs(i, j-1, board, path, root);
+        dfs(i-1, j, board, path, root);    
+        dfs(i+1, j, board, path, root);
+        board[i][j] = c;
     }
 
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
