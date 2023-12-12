@@ -1,3 +1,5 @@
+// same logic works for second part, just changes in
+// input processing
 #include<bits/stdc++.h>
 
 using namespace std;
