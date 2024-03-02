@@ -7,6 +7,7 @@
 // The time complexity of this approach is O(26.n) since 
 // it recomputes the word that occurs the max frequency eveytime 
 // a new window is computed.
+// To Do: Understand O(n) solution
 class Solution {
 public:
     int characterReplacement(string s, int k) {
@@ -16,6 +17,12 @@ public:
         int maxCharCount = 0;
         for(int r = 0; r < s.size(); r++) {
             word_freq[s[r] - 'A'] = word_freq[s[r] - 'A'] + 1;
+             // Key optimization step that brings
+            // algorithm to O(n). This is because
+            // the answer is a string that has the
+            // the best maxf
+            // maxf = max(maxf, word_freq[s[r] - 'A']);
+            // while(r - l + 1 - maxf) > k)
             while(r - l + 1 - *max_element(begin(word_freq), end(word_freq)) > k)
             {
                 word_freq[s[l] - 'A']--;
