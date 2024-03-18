@@ -1,38 +1,30 @@
-// (TODO) LC143
+// LC143
 
 class Solution {
 public:
     void reorderList(ListNode* head) {
+        if( (!head) || (!head->next) || (!head->next->next) ) return;
+        stack<ListNode*> stack;
+        ListNode* tmp = head;
         int ll_size = 0;
-        queue<ListNode*> nodes;
-        ListNode* tmp_head = head;
-        while(tmp_head != nullptr)
+        while(tmp != nullptr)
         {
+            stack.push(tmp);
             ll_size++;
-            nodes.push(head);
-            tmp_head = tmp_head->next;
+            tmp = tmp->next;
         }
-        cout<<ll_size<<endl;
-        
-        /*bool alternate = false;
-        tmp_head = head;
-        while(tmp_head != nullptr)
-        {
-            if(!alternate)
-            {
-                ListNode* queue_top = nodes.front();
-                nodes.pop();
-                ListNode *tmp = tmp_head->next;
-                tmp_head->next = queue_top;
-                queue_top = tmp;
-                tmp_head = tmp_head->next;
-            }
-            else
-            {
-                //tmp_head = tmp_head->next;
-            }
-            alternate = !alternate;
-        }*/
 
+        tmp=head;
+        // Insight : The replacements you have to 
+        // do is size of linked list/2
+        for(int i = 0; i<ll_size/2; i++)
+        {
+            ListNode* n = stack.top();
+            stack.pop();
+            n->next = tmp->next;
+            tmp->next = n;
+            tmp=tmp->next->next;
+        }
+        tmp->next = nullptr;
     }
 };
