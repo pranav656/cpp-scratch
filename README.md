@@ -5,7 +5,7 @@ Note: The implementations here are definitely not the cleanest (so no judgements
 to keep a record of things I am learning. May end up in an organized PDF with tests
 and optimizations some day.
 
-Problems taken from youtube(NeetCode), Blind75, Elements of Programming Interviews or Leetcode.
+Problems taken from youtube (NeetCode), Blind75, Elements of Programming Interviews or Leetcode.
 I also plan to add protypes of interesting concepts I am learning.
 
 # Resources
