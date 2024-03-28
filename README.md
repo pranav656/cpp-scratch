@@ -5,11 +5,13 @@ Note: The implementations here are definitely not the cleanest (so no judgements
 to keep a record of things I am learning. May end up in an organized PDF with tests
 and optimizations some day.
 
-Problems taken from youtube (NeetCode), Blind75, Elements of Programming Interviews or Leetcode.
+Problems taken from Blind75, Elements of Programming Interviews (book) or Leetcode/Neetcode.
 I also plan to add protypes of interesting concepts I am learning.
 
 # Resources
 https://cp-algorithms.com/index.html
+The Modern C++ Challenge by Marius Bancilla
+Advent of Code 
 
 ## Dynamic Programming
 https://www.quora.com/How-can-one-start-solving-dynamic-programming-problems
@@ -38,3 +40,4 @@ The repo contains solutions to 75+ problems, the most important problem list wil
 | Linked Lists | Merge Sorted Lists [Leetcode](https://leetcode.com/problems/merge-two-sorted-lists/) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/LinkedList/MergeSortedLists.cpp) | Merge during traversal |
 | Two Pointers | Valid Palindrome [Leetcode](https://leetcode.com/problems/valid-palindrome) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/TwoPointer/ValidPalindrome.cpp) | Two pointer comparison |
 | Math | Power(x,y) [Leetcode](https://leetcode.com/problems/powx-n) | [Solution](https://github.com/pranav656/cpp-scratch/blob/main/Math/powerxy.cpp) | recursively find the power |
+| Sliding Window | Minimum Window Substring[Leetcode](https://leetcode.com/problems/minimum-window-substring/description/) | [Solution] (https://github.com/pranav656/cpp-scratch/blob/main/SlidingWindow/MinimumWindowSubString.cpp) | Sliding Window keeping track of matches |
