@@ -22,6 +22,7 @@ Solid Principles:
 S: Single responsibility
 
 O : Open Closed Principle
+Open for extension, but closed for modification as unintentional modification can lead to bugs. 
 
 L : Liskov substiution principle
 
