@@ -17,7 +17,8 @@ a single combination can be m (i.e. a combination where
 you  just have 1s summing upto the number), but what about other 
 combinations? what is the maximum amount of combinations? That 
 depends on the input elements. It should probably be of the order of nCx where
-x is the number of elements that can sum upto a given combination.
+x is the number of elements that can sum upto a given combination, i.e. the number
+of combinations that can be obtained is the space complexity.
 
 The detailed explanation of the solution is here:
 https://www.youtube.com/watch?v=GBKI9VSKdGg
