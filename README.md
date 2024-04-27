@@ -24,6 +24,8 @@ https://open.kattis.com/problems/islandalliances
 
 https://open.kattis.com/problems/centsavings
 
+https://leetcode.com/problems/kth-largest-element-in-an-array/description/ using quickselect
+
 # Solved Problems
 The repo contains solutions to 75+ problems, the most important problem list will be updated below: 
 
