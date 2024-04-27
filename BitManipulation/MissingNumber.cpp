@@ -4,7 +4,9 @@
 // XOR. You XOR the input array with the ideal
 // array where all elements are present. The
 // missing number is left out and that's the
-// answer.
+// answer. Another way is to find the sum
+// from 0 to n, the current sum of the array.
+// The difference is the missing number.
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
