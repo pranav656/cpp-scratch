@@ -86,3 +86,43 @@ int main()
    vector<vector<int>> tc3 = {{1, 2, 1}};
    return 0;
 }
+
+
+//LC solution
+class Solution {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        vector<pair<int, int>> adj[n+1];
+        unordered_set<int> visited;
+        int t = 0;
+
+        for(auto it : times) {
+            int u = it[0];
+            int v = it[1];
+            int d = it[2];
+            adj[u].push_back({v, d});
+        }
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push({0, k});
+
+        while(!pq.empty()) {
+            int d = pq.top().first;
+            int n = pq.top().second;
+            pq.pop();
+
+            if(visited.count(n)) continue;
+            visited.insert(n);
+            t = max(t, d);
+            for(auto& it: adj[n])
+            {
+                if(visited.count(it.first) == 0)
+                {
+                    pq.push({d+it.second, it.first});
+                }
+            }
+        }
+
+        if(visited.size() == n) return t;
+        return -1;
+    }
+};
