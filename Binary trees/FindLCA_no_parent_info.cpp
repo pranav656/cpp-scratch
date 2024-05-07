@@ -94,3 +94,55 @@ int main()
     
    return 0;
 }
+
+// LC submission
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+// LC235 - Lowest common ancestor of a BST
+// Time complexity - O(logn) where n is the number
+// of nodes in a BST
+// Memory complexity - O(1)
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        int small = min(p->val, q->val);
+        int large = max(p->val, q->val);
+        while(root != nullptr)
+        {
+            // when root is greater than large, 
+            // it means both elements need to
+            // go to the left of the tree
+            if(root->val > large) root = root->left;
+            // when smaller of the two elements 
+            // is greater than the root, it means you need to
+            // go right
+            else if (root->val < small) root = root ->right;
+            // if root lies between two, it means LCA has been found
+            else return root;
+        }
+        return nullptr;
+    }
+};
+
+// recursive approach
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(p->val < root->val && q->val < root->val) {
+            return lowestCommonAncestor(root->left, p, q);
+        }
+        else if(p->val > root->val && q->val > root->val) {
+            return lowestCommonAncestor(root->right, p, q);
+        }
+        else {
+            return root;
+        }
+    }
+};
