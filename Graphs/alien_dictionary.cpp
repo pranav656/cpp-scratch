@@ -109,3 +109,107 @@ int main()
     cout<<AlienOrder(words);
    return 0;
 }
+
+
+
+// Alien Dictionary
+// Approach (Solution from neetcode
+// commented with explanation):
+// Build the graph of words
+// 
+class Solution {
+private:
+    // adjacency list of list of words
+    unordered_map<char, unordered_set<char>> adj;
+    // to detect for cycles, when cycles
+    // are detected, then a solution is not possible
+    unordered_map<char, bool> visited;
+    string result;
+public:
+    string foreignDictionary(vector<string>& words) {
+        for(const auto& word : words)
+        {
+            for(char ch : word)
+            {
+                // initializes the adjacency
+                // list with the characters
+                adj[ch];
+            }
+        }
+
+        // iterate through the words, two at a time
+        for(size_t i = 0; i < words.size()-1; ++i)
+        {
+            const string& w1 = words[i];
+            const string& w2 = words[i+1];
+            size_t minLen = min(w1.length(), w2.length());
+
+            // base case where there is no solution:
+            // if words next to each have a prefix
+            // that is equal and if the first word
+            // has larger length, it violates
+            // the basic assumption of the problem
+            // that the input list is lexographically 
+            // sorted. So, return an empty string.
+            if (w1.length() > w2.length() && 
+                w1.substr(0, minLen) == w2.substr(0, minLen) )
+            {
+                return "";
+            }
+            for(size_t j = 0; j < minLen; ++j)
+            {
+                // on first mismatch, we
+                // know that char at position j
+                // of word 1 is before char at 
+                // position j of word 2
+                if(w1[j] != w2[j]) {
+                    adj[w1[j]].insert(w2[j]);
+                    break;
+                }
+            }
+        }
+
+                    for(const auto& pair: adj)
+            {
+                // this DFS function does 
+                // two things, it build the result
+                // and checks if there exists a cycle
+                // in the graph, if cycle is detected
+                // return "" as solution is not possible
+                if(dfs(pair.first))
+                {
+                    return "";
+                }
+            }
+
+            // we do this reverse because
+            // the dfs is done in post order. 
+            // The postorder traveral ensures that
+            // the ordering of the characters in
+            // the graph is respect
+            reverse(result.begin(), result.end());
+            return result;
+    }
+
+    // does two things: ensures no cycle
+    // builds the result
+    bool dfs(char ch)
+    {
+        // cycle detection
+        if(visited.find(ch) != visited.end())
+        {
+            return visited[ch];
+        }
+
+        visited[ch] = true;
+        for(char next : adj[ch])
+        {
+            if(dfs(next)) {
+                return true;
+            }
+        }
+        visited[ch] = false;
+        result.push_back(ch);
+        return false;
+    }
+};
