@@ -89,3 +89,23 @@ Destructor call: When `delete b` is called, the destructor is called through the
 looks up the `vptr` and calls the function pointed by the destructor entry in the `Derived` class vtable followed
 by the base class destructor.
 
+Here's the step-by-step execution of the provided code:
+
+`Base* b = new Derived();:`
+A Derived object is created.
+vptr of the Derived object is set to the Derived class vtable.
+
+`b->show();`:
+b is of type Base*, but points to a Derived object.
+The vptr points to the Derived vtable.
+The program calls Derived::show().
+
+`b->display();`:
+The vptr points to the Derived vtable.
+The program calls Derived::display().
+
+`delete b;`:
+The vptr points to the Derived vtable.
+The program calls Derived::~Derived(), followed by Base::~Base().
+
+By understanding the vtable and vptr mechanism, we see how C++ achieves dynamic polymorphism, enabling the correct function implementations to be called based on the actual object type at runtime.
