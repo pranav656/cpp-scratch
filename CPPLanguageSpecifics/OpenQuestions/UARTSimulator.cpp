@@ -1,10 +1,11 @@
-// TODO: Not complete yet
+// TODO: Understand why program is not terminating 
 #include <iostream>
 #include <queue>
 #include <thread>
 #include <chrono>
 #include <mutex>
 #include <condition_variable>
+#include <atomic>
 
 class UARTSimulator {
 public:
@@ -56,6 +57,22 @@ public:
         rxThread.join();
     }
 
+    void stop() {
+        {
+            //std::lock_guard<std::mutex> lock(txMutex);
+            //std::lock_guard<std::mutex> lock2(rxMutex);
+            //terminateThreads = true;
+            // use defer lock to defer locking mutexes 
+            std::unique_lock<std::mutex> lock1(txMutex, std::defer_lock);
+            std::unique_lock<std::mutex> lock2(rxMutex, std::defer_lock);
+            // lock simultaneously to prevent deadlocks
+            std::lock(lock1, lock2);
+           terminateThreads = true;
+        }
+        txCondition.notify_one();
+        rxCondition.notify_one();
+    }
+
 private:
     int baudRate;
     int transmissionTime; // in microseconds
@@ -84,12 +101,20 @@ private:
     std::thread txThread;
     std::thread rxThread;
 
+    // Atomic flag to signal thread termination
+    // used for thread safety
+    std::atomic<bool> terminateThreads;
+
     void transmitter() {
         while(true) {
             std::unique_lock<std::mutex> lock(txMutex);
             txCondition.wait(lock, [this] {
                 return !txQueue.empty();
             });
+
+            if(terminateThreads) {
+                return;
+            }
 
             char data = txQueue.front();
             txQueue.pop();
@@ -107,7 +132,18 @@ private:
     }
 
     void receiver() {
+
         while(true) {
+            {
+                std::unique_lock<std::mutex> lock(rxMutex);
+                rxCondition.wait(lock, [this] {
+                    return !rxQueue.empty() || terminateThreads;
+                });
+
+                if(terminateThreads) {
+                    return;
+                }
+            }
             receive();
         }
     }
@@ -124,6 +160,11 @@ int main()
     uart.transmit('l');
     uart.transmit('l');
     uart.transmit('o');
+
+    // simulate a delay
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    uart.stop();
 
     uart.join();
     
