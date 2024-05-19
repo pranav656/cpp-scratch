@@ -1,4 +1,3 @@
-// TODO: Understand why program is not terminating 
 #include <iostream>
 #include <queue>
 #include <thread>
@@ -109,7 +108,7 @@ private:
         while(true) {
             std::unique_lock<std::mutex> lock(txMutex);
             txCondition.wait(lock, [this] {
-                return !txQueue.empty();
+                return (!txQueue.empty() || terminateThreads);
             });
 
             if(terminateThreads) {
@@ -137,7 +136,7 @@ private:
             {
                 std::unique_lock<std::mutex> lock(rxMutex);
                 rxCondition.wait(lock, [this] {
-                    return !rxQueue.empty() || terminateThreads;
+                    return (!rxQueue.empty() || terminateThreads);
                 });
 
                 if(terminateThreads) {
