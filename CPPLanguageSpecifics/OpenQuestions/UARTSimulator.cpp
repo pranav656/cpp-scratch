@@ -160,7 +160,7 @@ int main()
     uart.transmit('l');
     uart.transmit('o');
 
-    // simulate a delay
+    // simulate a delay for transmission to happen
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
     uart.stop();
