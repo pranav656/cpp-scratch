@@ -1,6 +1,10 @@
 // LC7 - Reverse Integer
 // Amazon
 // Constraints - Don't use more than 32 bits
+// Practical applications of this type of problem
+// Error Correction in Communications
+// Validation of Unique Identifiers
+// Cryptography
 class Solution {
 public:
     int reverse(int x) {
