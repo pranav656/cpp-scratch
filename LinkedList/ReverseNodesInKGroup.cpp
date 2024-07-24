@@ -13,7 +13,6 @@
 // Keep reversing and linking lists until there exists
 // elements that are less than k (track processed elements using
 // counter)
-// An approach exists to do it in one pass but harder to understand.
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -84,11 +83,26 @@ public:
                 end  = start;
                 // this links the reversed
                 // start node to the rest of the list
+
+                
+                // links the start (now end of list) to
+                // the start of the current list
+                //cout<<"start:"<<start->val<<endl;
+                //cout<<"curr:"<<curr->val<<endl;
+                //start:1
+                //curr:3
+                //start:3
+                //curr:5
                 start->next = curr;
                 // start
                 start = curr;
                 prev = nullptr;
 
+                // First part links the end (current start) of the sublist
+                // second part links the start (current end) of the sublist
+
+                // final check if there are more than k elements to be reversed
+                // if not break
                 if(n - totalcount < k) break;
             }
         }
